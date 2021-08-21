@@ -21,7 +21,7 @@ class Space
   end
   
   def print_buffer
-    puts @generation
+    puts "Generation: #{@generation}".yellow
     @buffer.each do |row|
       row.each_with_index do |cell, index|
         if index == 0
@@ -38,11 +38,11 @@ class Space
     end
   end
   
-  def set(x, y, val)
-    if x > @width - 1 || y > @height - 1
+  def set(x, y, val = 'X')
+    if y > @width - 1 || x > @height - 1
       raise OutOfBound
     else
-      buffer[x][y] = val
+      @buffer[y][x] = val
     end
   end
   
@@ -119,14 +119,28 @@ class Space
   def in_bounds?(point)
     x = point[0]
     y = point[1]
-    !(x < 0 || y < 0 || x > @width - 1 || y > @height - 1)
+    !(x < 0 || y < 0 || y > @width - 1 || x > @height - 1)
   end
 
 end
 
-space = Space.new(3, 3)
-space.set(0, 1, 'X')
-space.set(1, 1, 'X')
-space.set(2, 1, 'X')
+space = Space.new(10, 15)
+# glider 1
+# space.set(5, 5, 'X')
+# space.set(5, 6, 'X')
+# space.set(5, 7, 'X')
+# space.set(6, 5, 'X')
+# space.set(7, 6, 'X')
 
+# glider 2
+# space.set(5,5)
+# space.set(5,6)
+# space.set(5,7)
+# space.set(6,7)
+# space.set(4,7)
+
+# oscillator 1
+# space.set(5,5)
+# space.set(5,6)
+# space.set(5,7)
 space.animate
